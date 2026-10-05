@@ -1,13 +1,12 @@
 import * as React from 'react'
-import { Button, Spinner, Tag } from '@fluentui/react-components'
-import { ArrowClockwise20Regular } from '@fluentui/react-icons'
+import { Spinner, Tag } from '@fluentui/react-components'
 import { useTagPickerOptions } from '../hooks/useRecords'
 import { usePcfContext } from '../services/PcfContext'
 import { useStyles } from '../styles/Styles'
 
 const FluentUITagPicker = (): React.JSX.Element => {
     const pcfcontext = usePcfContext()
-    const { options, hasDatasetRecords, status, isFetching } = useTagPickerOptions()
+    const { options, hasDatasetRecords, status } = useTagPickerOptions()
     const styles = useStyles()
 
     if (!pcfcontext.lookupColumn.trim() || !pcfcontext.nestedLookupColumn.trim()) {
@@ -16,16 +15,6 @@ const FluentUITagPicker = (): React.JSX.Element => {
 
     return (
         <div className={styles.tagPickerContainer}>
-            <div className={styles.refreshButtonRow}>
-                <Button
-                    appearance="subtle"
-                    aria-label={pcfcontext.context.resources.getString('Refresh') || 'Refresh'}
-                    title={pcfcontext.context.resources.getString('Refresh') || 'Refresh'}
-                    icon={<ArrowClockwise20Regular />}
-                    disabled={isFetching}
-                    onClick={() => { pcfcontext.refreshDataset() }}
-                />
-            </div>
             {status === 'pending' && hasDatasetRecords
                 ? <Spinner size="tiny" appearance="primary" label={pcfcontext.context.resources.getString('Loading...') || 'Loading...'} />
                 : status === 'error'
@@ -39,6 +28,7 @@ const FluentUITagPicker = (): React.JSX.Element => {
                                 size="medium"
                                 appearance="brand"
                                 role="listitem"
+                                style={option.color && CSS.supports('color', option.color) ? { backgroundColor: option.color } : undefined}
                             >
                                 {option.displaytext}
                             </Tag>

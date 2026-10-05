@@ -88,4 +88,10 @@
   <data name="Configure both lookup columns." xml:space="preserve">
     <value>Configure both lookup columns.</value>
   </data>
+  <data name="Tag Color Column" xml:space="preserve">
+    <value>Tag Color Column</value>
+  </data>
+  <data name="Tag Color Column Description" xml:space="preserve">
+    <value>Optional logical name of a text column on the record referenced by Nested Lookup Column, containing a CSS color value for the tag fill.</value>
+  </data>
 </root>

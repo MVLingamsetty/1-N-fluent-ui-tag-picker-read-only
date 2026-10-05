@@ -88,4 +88,10 @@
   <data name="Configure both lookup columns." xml:space="preserve">
     <value>Configurez les deux colonnes de recherche.</value>
   </data>
+  <data name="Tag Color Column" xml:space="preserve">
+    <value>Colonne de couleur de l'etiquette</value>
+  </data>
+  <data name="Tag Color Column Description" xml:space="preserve">
+    <value>Nom logique facultatif d'une colonne texte sur l'enregistrement cible de Nested Lookup Column, contenant une couleur CSS pour le fond de l'etiquette.</value>
+  </data>
 </root>

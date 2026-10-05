@@ -11,14 +11,14 @@ export const useRecords = () => {
   const pcfcontext = usePcfContext()
   const { entityname } = useDatasetView()
   const { primaryid } = useMetadata(entityname)
-  const { lookupColumn, nestedLookupColumn } = pcfcontext
+  const { lookupColumn, nestedLookupColumn, tagColorColumn } = pcfcontext
   const datasetRecordIds = pcfcontext.context.parameters.tagsDataSet.sortedRecordIds ?? []
 
   const { data, status, error, isFetching } =
     useQuery<ComponentFramework.WebApi.Entity[], Error>(
       {
-        queryKey: ['datasetviewrecords', pcfcontext.instanceid, pcfcontext.viewid, lookupColumn, nestedLookupColumn, datasetRecordIds],
-        queryFn: () => pcfcontext.getDatsetViewRecords(entityname, primaryid, lookupColumn, nestedLookupColumn, datasetRecordIds),
+        queryKey: ['datasetviewrecords', pcfcontext.instanceid, pcfcontext.viewid, lookupColumn, nestedLookupColumn, tagColorColumn, datasetRecordIds],
+        queryFn: () => pcfcontext.getDatsetViewRecords(entityname, primaryid, lookupColumn, nestedLookupColumn, tagColorColumn, datasetRecordIds),
         enabled: !!entityname && !!primaryid && !!lookupColumn && !!nestedLookupColumn && datasetRecordIds.length > 0,
         staleTime: Infinity
       }
@@ -34,6 +34,7 @@ export interface IRecord {
   id: string;
   primaryname?: string;
   displaytext: string;
+  color?: string;
   imagesrc?: string;
 }
 
@@ -43,7 +44,8 @@ export const useTagPickerOptions = () => {
   const options:IRecord[] = records && primaryid ? records
     .map(record => ({
       id: String(record[primaryid] ?? ''),
-      displaytext: String(record.__tagDisplayText ?? '')
+      displaytext: String(record.__tagDisplayText ?? ''),
+      color: String(record.__tagColor ?? '')
     }))
     .filter(option => {
       const displayText = option.displaytext.trim()

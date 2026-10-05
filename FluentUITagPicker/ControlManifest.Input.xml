@@ -9,6 +9,7 @@
     </feature-usage>
     <property name="lookupColumn" display-name-key="Lookup Column" description-key="Lookup Column Description" of-type="SingleLine.Text" usage="input" required="true" />
     <property name="nestedLookupColumn" display-name-key="Nested Lookup Column" description-key="Nested Lookup Column Description" of-type="SingleLine.Text" usage="input" required="true" />
+    <property name="tagColorColumn" display-name-key="Tag Color Column" description-key="Tag Color Column Description" of-type="SingleLine.Text" usage="input" required="false" />
     <resources>
       <code path="index.ts" order="1" />
       <resx path="strings/FluentUITagPicker.1033.resx" version="1.0.0" />
